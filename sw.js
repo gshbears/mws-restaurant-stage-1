@@ -1,15 +1,15 @@
-var staticCacheName = 'restaurants-v2';
+let staticCacheName = 'restaurants-v5';
 
 self.addEventListener('install', function(event) {
-
+ //  console.log('Install cache');
   event.waitUntil(
     caches.open(staticCacheName).then(function(cache) {
       return cache.addAll([
         '/',
-        '/sw_reg.js',
         '/index.html',
         '/restaurant.html',
         '/css/styles.css',
+        '/css/restaurant_styles.css',
         '/data/restaurants.json',
         '/img/1.jpg',
         '/img/2.jpg',
@@ -23,20 +23,25 @@ self.addEventListener('install', function(event) {
         '/img/10.jpg',
         '/js/dbhelper.js',
         '/js/main.js',
-        '/js/restaurant_info.js'
+        '/js/restaurant_info.js',
+        '/sw_reg.js',
+        '/sw.js'
       ]);
     })
   );
 });
 
 self.addEventListener('activate', function(event) {
+  //  console.log('activate cache');
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.filter(function(cacheName) {
-          return cacheName.startsWith('restaurants-') &&
+        //  console.log(cacheName);
+          return cacheName.startsWith('restaurants-v') &&
                  cacheName != staticCacheName;
         }).map(function(cacheName) {
+        //  console.log("deleted cache");
           return caches.delete(cacheName);
         })
       );
@@ -46,16 +51,17 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
  var requestUrl = new URL(event.request.url);
-
  if(requestUrl.origin === location.origin){
+  // console.log(requestUrl.origin);
    if(requestUrl.pathname === '/'){
+  //   console.log(requestUrl.pathname);
      event.respondWith(caches.match('/'));
      return;
    }
  }
-
   event.respondWith(
     caches.match(event.request).then(function(response) {
+      // console.log(event.request);
       return response || fetch(event.request);
     })
   );

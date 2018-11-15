@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,25 +19,24 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" aria-label="Breadcrumb links" >
+    <ul id="breadcrumb" role="breadcrumb"  aria-label="Breadcrumb links" tabindex="0" >
       <li><a href="/">Home</a></li>
     </ul>
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
   <!-- End header -->
-
   <!-- Beginning main -->
   <main id="maincontent">
    <!--   <div id="map-restaurant" >-->
       <!-- Beginning map -->
-      <section id="map-container" aria-label="Street Map">
-        <div id="map"></div>
+      <section id="map-container" aria-label="Street Map" role="application" tabindex="-1">
+        <div id="map" tabindex="-1"></div>
       </section>
       <!-- End map -->
       <!-- Beginning restaurant -->
-      <section id="restaurant-container" aria-label="Restaurant Details">
-        <h1 id="restaurant-name"></h1>
+      <section id="restaurant-container" aria-label="Restaurant Details" role="list" tabindex="0">
+        <h2 id="restaurant-name"></h2>
         <img id="restaurant-img">
         <p id="restaurant-cuisine"></p>
         <p id="restaurant-address"></p>
@@ -46,8 +45,8 @@
    <!--  </div> -->
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="reviews-container" aria-label="Restaurant Reviews">
-      <ul id="reviews-list"></ul>
+    <section id="reviews-container" aria-label="Restaurant Reviews" role="list">
+      <ul id="reviews-list"  tabindex="0"></ul>
     </section>
     <!-- End reviews -->
   </main>
@@ -66,10 +65,8 @@
   <script type="text/javascript" src="js/restaurant_info.js"></script>
   <!-- Google Maps -->
  <!--  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_tKbW6A5pQ-eupxI56myUnHLqYCzOjKo&libraries=places&callback=initMap"></script> -->
-  <script type="text/javascript" src="sw_reg.js"></script>
-
+  <script type="text/javascript" src="/sw_reg.js"></script>
   <!-- End scripts -->
-
 </body>
 
 </html>
